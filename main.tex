@@ -1,15 +1,111 @@
-\documentclass{article}
-\usepackage{graphicx} % Required for inserting images
+% File: main.tex
+\documentclass[15pt]{extarticle}
 
-\title{DL4H - Project Proposal}
-\author{Lokanath Das}
-\date{October 2025}
+% --- Minimal, Overleaf-ready setup ---
+\usepackage[margin=1in]{geometry}
+\usepackage{times}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{natbib}
+\usepackage{titlesec}
+\usepackage{setspace}
+\setlist{nosep,leftmargin=*,itemsep=2pt,topsep=2pt}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+\titlespacing*{\section}{0pt}{6pt}{4pt}
+\titlespacing*{\subsection}{0pt}{5pt}{3pt}
+
+\title{\textbf{Project Proposal (Max 2 Pages, 15 pt)}\\
+\large Reproduction Plan: \emph{[Insert Paper Title Here]}}
+\author{[Anonymous / Your Name]}
+\date{}
 
 \begin{document}
-
 \maketitle
 
-\section{Introduction}
-asdfasdf
-change commit test test
+% Optional: keep to 1–3 sentences
+\textbf{Abstract.} One–to–three sentence overview of your reproduction plan.
+
+\section*{Introduction (3)}
+[Motivate the problem, why reproduction matters, your goals.]
+\textbf{Initial LLM prompt \& validation:}
+\begin{itemize}
+  \item \emph{Prompt used:} [1–2 lines]
+  \item \emph{Initial LLM output (abridged):} [key points]
+  \item \emph{Validation:} Correctness [low/med/high]; Relevance [low/med/high]; Helpfulness [low/med/high]
+  \item \# of prompts: [N]. If the initial prompt failed: [why/what you changed]
+\end{itemize}
+
+\section*{Problem Statement (2)}
+\textbf{What is the problem statement of the paper you are proposing to reproduce?}\\
+[1–2 precise sentences.]
+\textbf{Initial LLM prompt \& validation:}
+\begin{itemize}
+  \item \emph{Prompt used:} [...]
+  \item \emph{Initial LLM output:} [...]
+  \item \emph{Validation:} [correct/relevant/helpful?] \quad \#prompts: [N]
+  \item If initial prompt didn’t work: [what was wrong]
+\end{itemize}
+
+\section*{Citation to the Original Paper (1)}
+[Full citation with URL/DOI.]
+
+\section*{Methodology (6)}
+\subsection*{Specific Approach (2)}
+\textit{Models:} [Teacher / Student]\\
+\textit{Techniques:} [KD variant(s), uncertainty, contrastive, aggregation]\\
+\textit{Evaluation metrics:} [Accuracy, Specificity, Sensitivity, AUC, …]
+\\[2pt]
+\textbf{Initial LLM prompt \& validation:}
+\begin{itemize}
+  \item \emph{Prompt used:} [...]
+  \item \emph{Initial LLM output:} [...]
+  \item \emph{Validation:} [correct/relevant/helpful] \quad \#prompts: [N]
+  \item If initial prompt didn’t work: [what was wrong]
+\end{itemize}
+
+\subsection*{Novelty / Relevance / Hypotheses (2)}
+[What’s novel/relevant? Why better than baselines? Explicit hypotheses H1, H2, …]
+\\[2pt]
+\textbf{Initial LLM prompt \& validation:}
+\begin{itemize}
+  \item \emph{Prompt used:} [...]
+  \item \emph{Initial LLM output:} [...]
+  \item \emph{Validation:} [correct/relevant/helpful] \quad \#prompts: [N]
+  \item If initial prompt didn’t work: [what was wrong]
+\end{itemize}
+
+\subsection*{Ablations / Extensions Planned (2)}
+[Bullets: what you’ll ablate/extend; is the hypothesis legitimate and how you’ll test it.]
+
+\section*{Data Access and Implementation Details (5)}
+\subsection*{Description of Data/Model Access (2)}
+\textbf{What is the dataset they use and do they use a public codebase?}\\
+[Dataset name(s), access path (public/credentialed), any repo/demo, your access plan.]
+\\[2pt]
+\textbf{Initial LLM prompt \& validation:}
+\begin{itemize}
+  \item \emph{Prompt used:} [...]
+  \item \emph{Initial LLM output:} [...]
+  \item \emph{Validation:} [correct/relevant/helpful] \quad \#prompts: [N]
+  \item If initial prompt didn’t work: [what was wrong]
+\end{itemize}
+
+\subsection*{Discussion of Feasibility (2)}
+[Compute (GPUs/CPUs/RAM), time, storage, libs, risks \& mitigations.]
+
+\subsection*{Use Existing Code? (1)}
+[Explicit: use / partial reuse / reimplement, with justification.]
+
+\subsection*{Two-Page Limit (1)}
+[Affirm: This document is $\leq$ 2 pages in required format.]
+
+\section*{Additional Comments on Using LLM Prompts}
+[How you tweaked prompts for usefulness: structure, constraints, citations, bullets, etc.]
+
+% References / Appendix (Unlimited)
+\bibliographystyle{plainnat}
+\bibliography{refs} % Create refs.bib or replace with manual entries.
+
 \end{document}
