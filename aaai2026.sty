@@ -72,7 +72,7 @@ All rights reserved.}
 \long\gdef\affiliations #1{ \def \affiliations_{\if T\showauthors@on#1\fi}}%
 %
 \def\@maketitle{%
-  \def\theauthors{\if T\showauthors@on\@author\else Anonymous submission\fi}
+  \def\theauthors{\if T\showauthors@on\@author\else Anonymous submission \fi}
   \newcounter{eqfn}\setcounter{eqfn}{0}%
   \newsavebox{\titlearea}
   \sbox{\titlearea}{

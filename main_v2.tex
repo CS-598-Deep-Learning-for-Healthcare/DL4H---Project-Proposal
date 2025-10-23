@@ -1,0 +1,111 @@
+% File: main.tex
+\documentclass[letterpaper]{article} % DO NOT CHANGE THIS
+\usepackage[camera]{aaai2026}  % DO NOT CHANGE THIS
+\usepackage{times}  % DO NOT CHANGE THIS
+\usepackage{helvet}  % DO NOT CHANGE THIS
+\usepackage{courier}  % DO NOT CHANGE THIS
+\usepackage[hyphens]{url}  % DO NOT CHANGE THIS
+\usepackage{graphicx} % DO NOT CHANGE THIS
+\urlstyle{rm} % DO NOT CHANGE THIS
+\def\UrlFont{\rm}  % DO NOT CHANGE THIS
+\usepackage{natbib}  % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\usepackage{caption} % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\frenchspacing  % DO NOT CHANGE THIS
+\setlength{\pdfpagewidth}{8.5in} % DO NOT CHANGE THIS
+\setlength{\pdfpageheight}{11in} % DO NOT CHANGE THIS
+
+% (Optional helpers; safe to keep)
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{newfloat}
+\usepackage{listings}
+\DeclareCaptionStyle{ruled}{labelfont=normalfont,labelsep=colon,strut=off}
+\lstset{basicstyle={\footnotesize\ttfamily},numbers=left,numberstyle=\footnotesize,
+xleftmargin=2em,aboveskip=0pt,belowskip=0pt,showstringspaces=false,tabsize=2,breaklines=true}
+\floatstyle{ruled}
+\newfloat{listing}{tb}{lst}{}
+\floatname{listing}{Listing}
+
+\pdfinfo{
+/TemplateVersion (2026.1)
+}
+
+\setcounter{secnumdepth}{0}
+
+% ---------------- Title / Authors ----------------
+\title{Project Proposal: A Reimplementation of Integrating ChatGPT into Secure Hospital Networks: A Case Study on Improving Radiology Report Analysis }
+
+\author{
+  Lokanath Das, Jacob Fuehne, Jared Backofen
+}
+\affiliations{
+  Department of Computer Science, University of Illinois at Urbana-Champaign\\
+  Champaign, Illinois, USA\\
+  \{ldas2, jfuehne2, jaredb3\}@illinois.edu
+}
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This proposal outlines a plan to reproduce a healthcare NLP study that distills a powerful cloud LLM into an on-premise model for radiology report sentence classification under strict privacy constraints. We summarize the problem, approach, novelty, data access, feasibility, and implementation choices.
+\end{abstract}
+
+% =========================================================
+\section{Introduction}
+Hospitals face a tension between the high utility of state-of-the-art, cloud-based LLMs for clinical text analysis and the strict privacy and compliance requirements (e.g., HIPAA/GDPR) that restrict transmitting protected health information outside secure networks. The target paper by Kim \emph{et al.} \cite{kim2024chatgpt} proposes bridging this gap by transferring the performance of a cloud LLM to a smaller, secure, on-premise model through knowledge distillation applied to radiology report sentences.
+
+Hospitals face challen
+
+
+% =========================================================
+\section{Problem Statement}
+The paper addresses how to retain the analytical performance of a powerful cloud-hosted LLM (effective at interpreting radiology reports) while meeting hospital privacy requirements that prohibit sending sensitive text off-premise. The core challenge is to distill the capabilities of the cloud model into a smaller model that can run within a hospital’s closed network, narrowing the performance gap without compromising patient data security.
+
+% =========================================================
+\section{Methodology}
+
+\subsection{Specific Approach}
+The authors distill a cloud LLM (teacher; e.g., GPT-3.5/ChatGPT) into smaller, on-premise student models for sentence-level classification of radiology reports. Their method emphasizes \emph{Sentence-level Knowledge Distillation (S-KD)}, introducing a \emph{ternary label space} (normal / abnormal / uncertain) to explicitly capture ambiguity. Training combines \emph{cross-entropy loss} with a \emph{supervised contrastive loss} to better separate classes in representation space. Student backbones include medically oriented BERT-family models such as \emph{RadBERT-RoBERTa}, \emph{BioMed-RoBERTa}, \emph{BioBERT}, and \emph{BlueBERT}. Performance is evaluated using standard clinical classification metrics: \emph{Accuracy}, \emph{Sensitivity}, \emph{Specificity}, and \emph{AUC}.
+
+\subsection{Novelty / Relevance / Hypotheses to be Tested}
+\textbf{Novelty/Relevance.} The approach operationalizes \emph{privacy-preserving deployment} by transferring capability from a cloud LLM to an \emph{on-premise} model, aligning with real hospital constraints. Key innovations include \emph{sentence-level} distillation (finer granularity than document-level) and an explicit \emph{uncertain} class to handle ambiguous clinical language. The supervised contrastive component is relevant for sharpening class boundaries in subtle radiology statements. \\
+\textbf{Why better than baselines.} Compared to document-level KD or binary labeling, S-KD with a ternary scheme and contrastive learning is expected to yield better discrimination and safer abstention behavior (via ``uncertain'')—improving clinical reliability. \\
+\textbf{Hypotheses.} For the paper hypotheses, they claim that, sentence-level KD improves downstream classification over document-level KD, that adding an ``uncertain'' class reduces harmful misclassifications without materially degrading overall performance, and that contrastive loss enhances separability and metrics such as AUC.
+
+\subsection{Ablations / Extensions Planned}
+Planned ablations include: (A1) removing the contrastive term; (A2) collapsing ternary to binary labels; (A3) swapping student backbones (RadBERT-RoBERTa vs.\ BioBERT vs.\ BlueBERT); (A4) comparing sentence- vs.\ document-level KD. Potential extensions: \emph{calibration} (temperature scaling), \emph{selective prediction} (abstain thresholds on ``uncertain''), and \emph{prompt engineering} for teacher labeling consistency. We will assess whether the uncertainty class legitimately reduces clinically risky errors.
+
+% =========================================================
+\section{Data Access and Implementation Details}
+
+\subsection{Description of How You Will Access the Data/Model}
+We will use the \emph{MIMIC-CXR} corpus (de-identified public chest radiographs with reports). Access is granted via a data use agreement, PhysioNet onboarding. Following the paper, we will reproduce teacher labeling (cloud LLM) to derive sentence-level ternary labels, then train on-premise student models (e.g., RadBERT-RoBERTa). The paper indicates public code availability and notes that a trained RadBERT-RoBERTa model is accessible on Hugging Face; we will leverage any released assets when permitted and reproduce missing components as needed.
+
+\subsection{Discussion of the Feasibility of the Computation}
+Our team owns an Nvidia 4070, a 5080, and a macbook, so we'll be using a combination of nvidia gpus and possibly google collab to do our training of student models.  As for the teacher aspect of the architecture, we will be replacing ChatGPT 3.5 model (which is no longer offered by OpenAI) with Llama 3.3 70b versatile, hosted by Groq cloud.  Groq offers an unlimited free trial, as long as you remain below a rate limit, so this should reduce our API budget to \$0.  Overall, we expect to face no issues running the project, and to pay little to no cost.
+
+\subsection{Statement of Whether You Will Use the Existing Code or Not}
+We will use the available github code that the paper published, as well as the MIMIC data from Physio \cite{mimiccxr}.
+
+
+
+% ---------------- References (manual placeholder to avoid BibTeX errors) ----------------
+\begin{thebibliography}{9}
+
+\bibitem{kim2024chatgpt}
+Kim, K., Park, J., Langarica, S., Alkhadrawi, A. M., \& Do, S. (2024).
+\newblock Integrating ChatGPT into Secure Hospital Networks: A Case Study on Improving Radiology Report Analysis.
+\newblock \emph{CHIL 2024 / arXiv:2402.09358 [cs.AI]}. 
+\newblock \url{https://doi.org/10.48550/arXiv.2402.09358}
+
+\bibitem{mimiccxr}
+Johnson, A. E. W., et al. (2019).
+\newblock MIMIC-CXR: A large publicly available database of labeled chest radiographs.
+\newblock \emph{arXiv:1901.07042}.
+
+\end{thebibliography}
+
+
+\end{document}

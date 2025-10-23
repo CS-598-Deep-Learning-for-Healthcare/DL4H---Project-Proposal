@@ -1,111 +1,118 @@
 % File: main.tex
-\documentclass[15pt]{extarticle}
+\documentclass[letterpaper]{article} % DO NOT CHANGE THIS
+\usepackage[submission]{aaai2026}  % DO NOT CHANGE THIS
+\usepackage{times}  % DO NOT CHANGE THIS
+\usepackage{helvet}  % DO NOT CHANGE THIS
+\usepackage{courier}  % DO NOT CHANGE THIS
+\usepackage[hyphens]{url}  % DO NOT CHANGE THIS
+\usepackage{graphicx} % DO NOT CHANGE THIS
+\urlstyle{rm} % DO NOT CHANGE THIS
+\def\UrlFont{\rm}  % DO NOT CHANGE THIS
+\usepackage{natbib}  % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\usepackage{caption} % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\frenchspacing  % DO NOT CHANGE THIS
+\setlength{\pdfpagewidth}{8.5in} % DO NOT CHANGE THIS
+\setlength{\pdfpageheight}{11in} % DO NOT CHANGE THIS
 
-% --- Minimal, Overleaf-ready setup ---
-\usepackage[margin=1in]{geometry}
-\usepackage{times}
-\usepackage{url}
-\usepackage{graphicx}
-\usepackage{enumitem}
-\usepackage{natbib}
-\usepackage{titlesec}
-\usepackage{setspace}
-\setlist{nosep,leftmargin=*,itemsep=2pt,topsep=2pt}
-\setlength{\parskip}{4pt}
-\setlength{\parindent}{0pt}
-\titlespacing*{\section}{0pt}{6pt}{4pt}
-\titlespacing*{\subsection}{0pt}{5pt}{3pt}
+% (Optional helpers; remove if not needed)
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{newfloat}
+\usepackage{listings}
+\DeclareCaptionStyle{ruled}{labelfont=normalfont,labelsep=colon,strut=off}
+\lstset{basicstyle={\footnotesize\ttfamily},numbers=left,numberstyle=\footnotesize,
+xleftmargin=2em,aboveskip=0pt,belowskip=0pt,showstringspaces=false,tabsize=2,breaklines=true}
+\floatstyle{ruled}
+\newfloat{listing}{tb}{lst}{}
+\floatname{listing}{Listing}
 
-\title{\textbf{Project Proposal (Max 2 Pages, 15 pt)}\\
-\large Reproduction Plan: \emph{[Insert Paper Title Here]}}
-\author{[Anonymous / Your Name]}
-\date{}
+\pdfinfo{
+/TemplateVersion (2026.1)
+}
+
+\setcounter{secnumdepth}{0}
+
+% ---------------- Title / Authors ----------------
+\title{Project Proposal (Max 2 Pages)\\
+Reproduction Plan: \emph{[Insert Paper Title Here]}}
+\author{Anonymous Submission}
+\affiliations{~}
 
 \begin{document}
 \maketitle
 
-% Optional: keep to 1–3 sentences
-\textbf{Abstract.} One–to–three sentence overview of your reproduction plan.
+\begin{abstract}
+[One–to–three sentence overview of your reproduction plan.]
+\end{abstract}
 
-\section*{Introduction (3)}
-[Motivate the problem, why reproduction matters, your goals.]
-\textbf{Initial LLM prompt \& validation:}
-\begin{itemize}
-  \item \emph{Prompt used:} [1–2 lines]
-  \item \emph{Initial LLM output (abridged):} [key points]
-  \item \emph{Validation:} Correctness [low/med/high]; Relevance [low/med/high]; Helpfulness [low/med/high]
-  \item \# of prompts: [N]. If the initial prompt failed: [why/what you changed]
-\end{itemize}
+% =========================================================
+\section{Introduction (3)}
+[Motivate the problem and why reproducing this paper matters; state your goals and what you will verify.]
 
-\section*{Problem Statement (2)}
-\textbf{What is the problem statement of the paper you are proposing to reproduce?}\\
-[1–2 precise sentences.]
-\textbf{Initial LLM prompt \& validation:}
-\begin{itemize}
-  \item \emph{Prompt used:} [...]
-  \item \emph{Initial LLM output:} [...]
-  \item \emph{Validation:} [correct/relevant/helpful?] \quad \#prompts: [N]
-  \item If initial prompt didn’t work: [what was wrong]
-\end{itemize}
 
-\section*{Citation to the Original Paper (1)}
-[Full citation with URL/DOI.]
+% =========================================================
+\section{Problem Statement (2)}
+\textbf{What is the problem statement of the paper you are proposing to reproduce?}
 
-\section*{Methodology (6)}
-\subsection*{Specific Approach (2)}
-\textit{Models:} [Teacher / Student]\\
-\textit{Techniques:} [KD variant(s), uncertainty, contrastive, aggregation]\\
-\textit{Evaluation metrics:} [Accuracy, Specificity, Sensitivity, AUC, …]
-\\[2pt]
-\textbf{Initial LLM prompt \& validation:}
-\begin{itemize}
-  \item \emph{Prompt used:} [...]
-  \item \emph{Initial LLM output:} [...]
-  \item \emph{Validation:} [correct/relevant/helpful] \quad \#prompts: [N]
-  \item If initial prompt didn’t work: [what was wrong]
-\end{itemize}
+[One to two precise sentences.]
 
-\subsection*{Novelty / Relevance / Hypotheses (2)}
-[What’s novel/relevant? Why better than baselines? Explicit hypotheses H1, H2, …]
-\\[2pt]
-\textbf{Initial LLM prompt \& validation:}
-\begin{itemize}
-  \item \emph{Prompt used:} [...]
-  \item \emph{Initial LLM output:} [...]
-  \item \emph{Validation:} [correct/relevant/helpful] \quad \#prompts: [N]
-  \item If initial prompt didn’t work: [what was wrong]
-\end{itemize}
 
-\subsection*{Ablations / Extensions Planned (2)}
-[Bullets: what you’ll ablate/extend; is the hypothesis legitimate and how you’ll test it.]
+% =========================================================
+\section{Citation to the Original Paper (1)}
+[Full citation with authors, title, venue/year, DOI/URL or arXiv.]
 
-\section*{Data Access and Implementation Details (5)}
-\subsection*{Description of Data/Model Access (2)}
-\textbf{What is the dataset they use and do they use a public codebase?}\\
-[Dataset name(s), access path (public/credentialed), any repo/demo, your access plan.]
-\\[2pt]
-\textbf{Initial LLM prompt \& validation:}
-\begin{itemize}
-  \item \emph{Prompt used:} [...]
-  \item \emph{Initial LLM output:} [...]
-  \item \emph{Validation:} [correct/relevant/helpful] \quad \#prompts: [N]
-  \item If initial prompt didn’t work: [what was wrong]
-\end{itemize}
+% =========================================================
+\section{Methodology (6)}
 
-\subsection*{Discussion of Feasibility (2)}
-[Compute (GPUs/CPUs/RAM), time, storage, libs, risks \& mitigations.]
+\subsection{Specific Approach (2)}
+\textbf{What was the specific approach they took to solve the problem? Include models, techniques, and evaluation metrics.}
 
-\subsection*{Use Existing Code? (1)}
-[Explicit: use / partial reuse / reimplement, with justification.]
+\textit{Models:} [Teacher / Student backbones] \\
+\textit{Techniques:} [e.g., KD variants, uncertainty handling, contrastive loss, aggregation rule] \\
+\textit{Evaluation metrics:} [Accuracy, Specificity, Sensitivity, AUC, etc.]
 
-\subsection*{Two-Page Limit (1)}
-[Affirm: This document is $\leq$ 2 pages in required format.]
+\subsection{Novelty / Relevance / Hypotheses to be Tested (2)}
+\textbf{What exactly is the novelty or relevance of their paper? Why is their proposed method better than baselines? What hypothesis do they make?}
 
-\section*{Additional Comments on Using LLM Prompts}
-[How you tweaked prompts for usefulness: structure, constraints, citations, bullets, etc.]
+[Summarize contributions; why it beats baselines; list explicit hypotheses (H1, H2, ...).]
 
-% References / Appendix (Unlimited)
-\bibliographystyle{plainnat}
-\bibliography{refs} % Create refs.bib or replace with manual entries.
+\subsection{Ablations / Extensions Planned (2)}
+\textbf{What do you think could improve their method? Is their hypothesis legitimate?}
+
+[Planned ablation bullets; proposed extensions; how you will test hypothesis legitimacy.]
+
+% =========================================================
+\section{Data Access and Implementation Details (5)}
+
+\subsection{Description of How You Will Access the Data/Model (2)}
+\textbf{What is the dataset they use and do they use a public codebase?}
+
+[Dataset name(s), access path (public/credentialed), any open-source repo or demo, and your access plan.]
+
+
+\subsection{Discussion of the Feasibility of the Computation (2)}
+[Compute budget (GPUs/CPUs/RAM), expected training time, storage, libraries, risks and mitigations.]
+
+We will be using 
+
+\subsection{Statement of Whether You Will Use the Existing Code or Not (1)}
+[Explicitly: use existing code / partial reuse / reimplement. Brief justification.]
+
+\subsection{The Project Proposal Is Within 2 Page Limit (1)}
+[Affirmation: This document is $\leq$ 2 pages in AAAI submission format.]
+
+% =========================================================
+\section{Additional Comments or Insights on Using LLM Prompts}
+\textit{How did you tweak the prompt to be more effective/useful?}
+
+[Brief notes: structure, constraints, request citations/sections, require bullet points, etc.]
+
+% ---------------- References / Appendix (Unlimited) ----------------
+% If you have aaai2026.bst and refs.bib in your project, uncomment the next line:
+% \bibliography{refs}
+
+% Otherwise, use a manual placeholder (delete once BibTeX is set up):
+% \small
+% \noindent\textbf{References (placeholder)}\quad [Add your references or enable BibTeX.]
 
 \end{document}
